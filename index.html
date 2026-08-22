@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vensoco — Conexión verificada para encontrar con quién construir</title>
+<link rel="alternate" hreflang="es" href="https://vensoco.com/">
+<link rel="alternate" hreflang="en" href="https://vensoco.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://vensoco.com/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --navy: #0f172a;
+    --navy-soft: #1e293b;
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --gray-600: #475569;
+    --gray-400: #94a3b8;
+    --gray-100: #f1f5f9;
+    --border: #e2e8f0;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 9px; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--navy); }
+  .logo span { color: var(--blue); }
+  .logo svg { width: 24px; height: 24px; flex-shrink: 0; }
+  nav { display: flex; align-items: center; gap: 20px; }
+  nav a {
+    color: var(--gray-600);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .lang-switch { display: flex; gap: 6px; font-size: 13px; font-weight: 600; }
+  .lang-switch a { color: var(--gray-400); }
+  .lang-switch a.active { color: var(--navy); }
+  .lang-switch span { color: var(--border); }
+
+  /* Hero */
+  .hero {
+    padding: 88px 0 64px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 44px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    max-width: 720px;
+    margin: 0 auto 20px;
+  }
+  .hero p.sub {
+    font-size: 19px;
+    color: var(--gray-600);
+    max-width: 560px;
+    margin: 0 auto 36px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 6px 16px rgba(37,99,235,0.28); }
+  .btn-secondary { background: var(--navy); color: var(--white); }
+  .btn-secondary:hover { box-shadow: 0 6px 16px rgba(15,23,42,0.22); }
+
+  /* Trust bullets */
+  .trust {
+    padding: 56px 0;
+    background: var(--gray-100);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .trust-item { text-align: left; }
+  .trust-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .trust-icon svg { width: 20px; height: 20px; stroke: var(--white); }
+  .trust-item h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .trust-item p { font-size: 14.5px; color: var(--gray-600); }
+
+  /* Signup */
+  .signup { padding: 80px 0; }
+  .signup > .wrap > h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .signup > .wrap > p.lead {
+    text-align: center;
+    color: var(--gray-600);
+    font-size: 16px;
+    margin-bottom: 48px;
+  }
+  .forms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .form-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    background: var(--white);
+  }
+  .form-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .form-card p.desc { font-size: 14px; color: var(--gray-600); margin-bottom: 24px; }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 16px;
+    color: var(--navy-soft);
+  }
+  label:first-of-type { margin-top: 0; }
+  input[type="text"], input[type="email"], select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14.5px;
+    font-family: inherit;
+    color: var(--navy);
+    background: var(--white);
+  }
+  input:focus, select:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+  .form-card button {
+    margin-top: 22px;
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--white);
+  }
+  #form-creador button { background: var(--blue); }
+  #form-creador button:hover { background: var(--blue-dark); }
+  #form-socio button { background: var(--navy); }
+  #form-socio button:hover { background: var(--navy-soft); }
+  .confirm {
+    display: none;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+    font-size: 13.5px;
+  }
+  .error {
+    display: none;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    font-size: 13.5px;
+  }
+  .form-card button[disabled] {
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  .legal {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+  }
+  .legal h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .legal p { font-size: 13.5px; color: var(--gray-600); max-width: 640px; margin-bottom: 10px; }
+  .legal p:last-child { margin-bottom: 0; }
+
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--gray-400); }
+  footer a { color: var(--gray-400); text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 32px; }
+    .trust-grid, .forms-grid { grid-template-columns: 1fr; }
+    .cta-row { flex-direction: column; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M12,9 L23,33" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/><path d="M36,9 L25,33" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/><circle cx="24" cy="35.5" r="3.5" fill="#1e293b"/></svg>
+      <span class="logo-text">Ven<span>soco</span></span>
+    </div>
+    <nav>
+      <a href="#registro">Registrarme</a>
+      <div class="lang-switch"><a href="/" class="active">ES</a><span>/</span><a href="/en/">EN</a></div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Conexión verificada para encontrar con quién construir.</h1>
+    <p class="sub">Vensoco conecta creadores digitales con socios operativos reales — verificados, sin intermediarios, sin que nadie más se entere de lo que negocian.</p>
+    <div class="cta-row">
+      <a href="#form-creador" class="btn btn-primary">Busco un socio operativo</a>
+      <a href="#form-socio" class="btn btn-secondary">Busco unirme a un proyecto</a>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Identidad verificada</h3>
+      <p>Cada perfil pasa verificación real antes de aparecer en el feed. Sabes con quién realmente estás hablando.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8l4 4-4 4"/><path d="M7 8l-4 4 4 4"/><path d="M14 4l-4 16"/></svg>
+      </div>
+      <h3>Cero intermediario</h3>
+      <p>El trato es 100% entre ustedes. Vensoco nunca participa en la negociación ni cobra comisión sobre lo que acuerden.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h3>Privacidad total</h3>
+      <p>Lo que negocien se queda entre ustedes. Nunca a la vista de terceros, nunca guardado para uso de la plataforma.</p>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="registro">
+  <div class="wrap">
+    <h2>Sé de los primeros en Vensoco</h2>
+    <p class="lead">Estamos armando el primer grupo antes de abrir al público. Dos minutos, nada más.</p>
+    <div class="forms-grid">
+
+      <div class="form-card" id="form-creador">
+        <h3>Busco un socio operativo</h3>
+        <p class="desc">Tienes un proyecto digital y necesitas a alguien que construya o ejecute contigo, no solo capital.</p>
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-creador', 'error-creador')">
+          <input type="hidden" name="tipo" value="Busca socio operativo">
+          <input type="hidden" name="idioma" value="Español">
+          <input type="hidden" name="_subject" value="Vensoco — nuevo registro: busca socio operativo">
+          <label for="proyecto-nombre">Nombre del proyecto</label>
+          <input type="text" id="proyecto-nombre" name="proyecto_nombre" required>
+          <label for="proyecto-etapa">Etapa</label>
+          <select id="proyecto-etapa" name="etapa" required>
+            <option value="">Selecciona una opción</option>
+            <option>Idea</option>
+            <option>MVP en construcción</option>
+            <option>Con usuarios / ingresos</option>
+          </select>
+          <label for="creador-email">Correo</label>
+          <input type="email" id="creador-email" name="email" required>
+          <button type="submit">Unirme a la lista</button>
+          <div class="confirm" id="confirm-creador">Listo — te contactamos cuando abramos acceso.</div>
+          <div class="error" id="error-creador">No se pudo enviar. Intenta de nuevo, o escríbenos directo a contacto@vensoco.com.</div>
+        </form>
+      </div>
+
+      <div class="form-card" id="form-socio">
+        <h3>Busco unirme a un proyecto</h3>
+        <p class="desc">Tienes una habilidad o tiempo real que ofrecer y buscas un proyecto digital al que sumarte como socio.</p>
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-socio', 'error-socio')">
+          <input type="hidden" name="tipo" value="Quiere unirse como socio">
+          <input type="hidden" name="idioma" value="Español">
+          <input type="hidden" name="_subject" value="Vensoco — nuevo registro: quiere unirse como socio">
+          <label for="socio-area">Área de habilidad</label>
+          <input type="text" id="socio-area" name="area_habilidad" placeholder="Ej. desarrollo, diseño, marketing, operaciones" required>
+          <label for="socio-disponibilidad">Disponibilidad</label>
+          <select id="socio-disponibilidad" name="disponibilidad" required>
+            <option value="">Selecciona una opción</option>
+            <option>Tiempo parcial</option>
+            <option>Tiempo completo</option>
+            <option>Por proyecto</option>
+          </select>
+          <label for="socio-email">Correo</label>
+          <input type="email" id="socio-email" name="email" required>
+          <button type="submit">Unirme a la lista</button>
+          <div class="confirm" id="confirm-socio">Listo — te contactamos cuando abramos acceso.</div>
+          <div class="error" id="error-socio">No se pudo enviar. Intenta de nuevo, o escríbenos directo a contacto@vensoco.com.</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="legal" id="privacidad">
+  <div class="wrap">
+    <h2>Privacidad y datos</h2>
+    <p>Los formularios de esta página recogen tu nombre, la información de tu proyecto o habilidad, y tu correo, únicamente para que el equipo de Vensoco pueda contactarte sobre tu registro. No vendemos ni compartimos estos datos con terceros, y no los usamos para nada distinto a responderte. Los envíos se procesan a través de Formspree (formspree.io) antes de llegar a nuestro correo.</p>
+    <p>Si quieres que eliminemos tu información, escríbenos a contacto@vensoco.com. Como se explica arriba, Vensoco nunca participa en las negociaciones ni transacciones entre usuarios — este aviso cubre únicamente los datos de contacto que tú nos entregas directamente al registrarte.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Vensoco. Todos los acuerdos ocurren directamente entre los usuarios, fuera de la plataforma. · <a href="#privacidad">Privacidad</a></p>
+  </div>
+</footer>
+
+<script>
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbgrzgol';
+
+  async function enviarFormulario(event, form, confirmId, errorId) {
+    event.preventDefault();
+    var boton = form.querySelector('button[type="submit"]');
+    var textoOriginal = boton.textContent;
+    document.getElementById(errorId).style.display = 'none';
+    document.getElementById(confirmId).style.display = 'none';
+    boton.disabled = true;
+    boton.textContent = 'Enviando...';
+    try {
+      var respuesta = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (respuesta.ok) {
+        form.reset();
+        document.getElementById(confirmId).style.display = 'block';
+      } else {
+        document.getElementById(errorId).style.display = 'block';
+      }
+    } catch (error) {
+      document.getElementById(errorId).style.display = 'block';
+    }
+    boton.disabled = false;
+    boton.textContent = textoOriginal;
+    return false;
+  }
+</script>
+
+</body>
+</html>

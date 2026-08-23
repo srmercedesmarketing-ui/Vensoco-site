@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Vensoco Landing",
+  "schemaVersion": 1,
+  "description": "Landing page pre-lanzamiento de Vensoco — copy y diseño para la pieza de sociedad operativa (identidad verificada, cero intermediario, privacidad total), con formularios de lista de espera para creadores y socios operativos.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -293,21 +302,19 @@
       <div class="form-card" id="form-creador">
         <h3>Busco un socio operativo</h3>
         <p class="desc">Tienes un proyecto digital y necesitas a alguien que construya o ejecute contigo, no solo capital.</p>
-        <form onsubmit="return enviarFormulario(event, this, 'confirm-creador', 'error-creador')">
-          <input type="hidden" name="tipo" value="Busca socio operativo">
-          <input type="hidden" name="idioma" value="Español">
-          <input type="hidden" name="_subject" value="Vensoco — nuevo registro: busca socio operativo">
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-creador', 'error-creador', GOOGLE_FORM_CREADOR)">
+          <input type="hidden" name="entry.110543479" value="Español">
           <label for="proyecto-nombre">Nombre del proyecto</label>
-          <input type="text" id="proyecto-nombre" name="proyecto_nombre" required>
+          <input type="text" id="proyecto-nombre" name="entry.214275258" required>
           <label for="proyecto-etapa">Etapa</label>
-          <select id="proyecto-etapa" name="etapa" required>
+          <select id="proyecto-etapa" name="entry.1687610293" required>
             <option value="">Selecciona una opción</option>
             <option>Idea</option>
             <option>MVP en construcción</option>
             <option>Con usuarios / ingresos</option>
           </select>
           <label for="creador-email">Correo</label>
-          <input type="email" id="creador-email" name="email" required>
+          <input type="email" id="creador-email" name="entry.1863021685" required>
           <button type="submit">Unirme a la lista</button>
           <div class="confirm" id="confirm-creador">Listo — te contactamos cuando abramos acceso.</div>
           <div class="error" id="error-creador">No se pudo enviar. Intenta de nuevo, o escríbenos directo a contacto@vensoco.com.</div>
@@ -317,21 +324,19 @@
       <div class="form-card" id="form-socio">
         <h3>Busco unirme a un proyecto</h3>
         <p class="desc">Tienes una habilidad o tiempo real que ofrecer y buscas un proyecto digital al que sumarte como socio.</p>
-        <form onsubmit="return enviarFormulario(event, this, 'confirm-socio', 'error-socio')">
-          <input type="hidden" name="tipo" value="Quiere unirse como socio">
-          <input type="hidden" name="idioma" value="Español">
-          <input type="hidden" name="_subject" value="Vensoco — nuevo registro: quiere unirse como socio">
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-socio', 'error-socio', GOOGLE_FORM_SOCIO)">
+          <input type="hidden" name="entry.1424527372" value="Español">
           <label for="socio-area">Área de habilidad</label>
-          <input type="text" id="socio-area" name="area_habilidad" placeholder="Ej. desarrollo, diseño, marketing, operaciones" required>
+          <input type="text" id="socio-area" name="entry.205067118" placeholder="Ej. desarrollo, diseño, marketing, operaciones" required>
           <label for="socio-disponibilidad">Disponibilidad</label>
-          <select id="socio-disponibilidad" name="disponibilidad" required>
+          <select id="socio-disponibilidad" name="entry.1091950941" required>
             <option value="">Selecciona una opción</option>
             <option>Tiempo parcial</option>
             <option>Tiempo completo</option>
             <option>Por proyecto</option>
           </select>
           <label for="socio-email">Correo</label>
-          <input type="email" id="socio-email" name="email" required>
+          <input type="email" id="socio-email" name="entry.1007206245" required>
           <button type="submit">Unirme a la lista</button>
           <div class="confirm" id="confirm-socio">Listo — te contactamos cuando abramos acceso.</div>
           <div class="error" id="error-socio">No se pudo enviar. Intenta de nuevo, o escríbenos directo a contacto@vensoco.com.</div>
@@ -345,7 +350,7 @@
 <section class="legal" id="privacidad">
   <div class="wrap">
     <h2>Privacidad y datos</h2>
-    <p>Los formularios de esta página recogen tu nombre, la información de tu proyecto o habilidad, y tu correo, únicamente para que el equipo de Vensoco pueda contactarte sobre tu registro. No vendemos ni compartimos estos datos con terceros, y no los usamos para nada distinto a responderte. Los envíos se procesan a través de Formspree (formspree.io) antes de llegar a nuestro correo.</p>
+    <p>Los formularios de esta página recogen tu nombre, la información de tu proyecto o habilidad, y tu correo, únicamente para que el equipo de Vensoco pueda contactarte sobre tu registro. No vendemos ni compartimos estos datos con terceros, y no los usamos para nada distinto a responderte. Los envíos se procesan a través de Google Forms antes de llegar a nuestro correo.</p>
     <p>Si quieres que eliminemos tu información, escríbenos a contacto@vensoco.com. Como se explica arriba, Vensoco nunca participa en las negociaciones ni transacciones entre usuarios — este aviso cubre únicamente los datos de contacto que tú nos entregas directamente al registrarte.</p>
   </div>
 </section>
@@ -357,9 +362,10 @@
 </footer>
 
 <script>
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbgrzgol';
+  var GOOGLE_FORM_CREADOR = 'https://docs.google.com/forms/d/e/1FAIpQLSc__yk6mTPdpXDagIGFTQtjx_h2Ubnq9z7IAi0pCiPWDRlFsA/formResponse';
+  var GOOGLE_FORM_SOCIO   = 'https://docs.google.com/forms/d/e/1FAIpQLSf7UYDZ_9gcZJWRML5CnbzFjiV8iS5wB1J5kXp34mpK0PDKFA/formResponse';
 
-  async function enviarFormulario(event, form, confirmId, errorId) {
+  async function enviarFormulario(event, form, confirmId, errorId, endpoint) {
     event.preventDefault();
     var boton = form.querySelector('button[type="submit"]');
     var textoOriginal = boton.textContent;
@@ -368,18 +374,17 @@
     boton.disabled = true;
     boton.textContent = 'Enviando...';
     try {
-      var respuesta = await fetch(FORMSPREE_ENDPOINT, {
+      await fetch(endpoint, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        mode: 'no-cors',
+        body: new FormData(form)
       });
-      if (respuesta.ok) {
-        form.reset();
-        document.getElementById(confirmId).style.display = 'block';
-      } else {
-        document.getElementById(errorId).style.display = 'block';
-      }
+      // no-cors: Google no permite leer si aceptó el envío.
+      // Se asume éxito porque la prueba manual ya validó los entry.ID.
+      form.reset();
+      document.getElementById(confirmId).style.display = 'block';
     } catch (error) {
+      // esto sí se dispara en fallos reales de red (sin conexión, DNS, etc.)
       document.getElementById(errorId).style.display = 'block';
     }
     boton.disabled = false;

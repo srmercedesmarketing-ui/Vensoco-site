@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Vensoco Landing En",
+  "schemaVersion": 1,
+  "description": "Versión en inglés del landing de Vensoco (vensoco.com/en/), para audiencia global.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -293,21 +302,19 @@
       <div class="form-card" id="form-creador">
         <h3>I'm looking for an operating partner</h3>
         <p class="desc">You have a digital project and need someone who builds or executes with you — not just capital.</p>
-        <form onsubmit="return enviarFormulario(event, this, 'confirm-creador', 'error-creador')">
-          <input type="hidden" name="tipo" value="Looking for operating partner">
-          <input type="hidden" name="idioma" value="English">
-          <input type="hidden" name="_subject" value="Vensoco — new signup: looking for operating partner (EN)">
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-creador', 'error-creador', GOOGLE_FORM_CREADOR)">
+          <input type="hidden" name="entry.110543479" value="English">
           <label for="proyecto-nombre">Project name</label>
-          <input type="text" id="proyecto-nombre" name="proyecto_nombre" required>
+          <input type="text" id="proyecto-nombre" name="entry.214275258" required>
           <label for="proyecto-etapa">Stage</label>
-          <select id="proyecto-etapa" name="etapa" required>
+          <select id="proyecto-etapa" name="entry.1687610293" required>
             <option value="">Select an option</option>
             <option>Idea</option>
             <option>MVP in progress</option>
             <option>Has users / revenue</option>
           </select>
           <label for="creador-email">Email</label>
-          <input type="email" id="creador-email" name="email" required>
+          <input type="email" id="creador-email" name="entry.1863021685" required>
           <button type="submit">Join the list</button>
           <div class="confirm" id="confirm-creador">Done — we'll reach out when we open access.</div>
           <div class="error" id="error-creador">Something went wrong. Try again, or email us directly at contacto@vensoco.com.</div>
@@ -317,21 +324,19 @@
       <div class="form-card" id="form-socio">
         <h3>I want to join a project</h3>
         <p class="desc">You have a real skill or real time to offer and you're looking for a digital project to join as a partner.</p>
-        <form onsubmit="return enviarFormulario(event, this, 'confirm-socio', 'error-socio')">
-          <input type="hidden" name="tipo" value="Wants to join as partner">
-          <input type="hidden" name="idioma" value="English">
-          <input type="hidden" name="_subject" value="Vensoco — new signup: wants to join as partner (EN)">
+        <form onsubmit="return enviarFormulario(event, this, 'confirm-socio', 'error-socio', GOOGLE_FORM_SOCIO)">
+          <input type="hidden" name="entry.1424527372" value="English">
           <label for="socio-area">Skill area</label>
-          <input type="text" id="socio-area" name="area_habilidad" placeholder="E.g. development, design, marketing, operations" required>
+          <input type="text" id="socio-area" name="entry.205067118" placeholder="E.g. development, design, marketing, operations" required>
           <label for="socio-disponibilidad">Availability</label>
-          <select id="socio-disponibilidad" name="disponibilidad" required>
+          <select id="socio-disponibilidad" name="entry.1091950941" required>
             <option value="">Select an option</option>
             <option>Part-time</option>
             <option>Full-time</option>
             <option>Project-based</option>
           </select>
           <label for="socio-email">Email</label>
-          <input type="email" id="socio-email" name="email" required>
+          <input type="email" id="socio-email" name="entry.1007206245" required>
           <button type="submit">Join the list</button>
           <div class="confirm" id="confirm-socio">Done — we'll reach out when we open access.</div>
           <div class="error" id="error-socio">Something went wrong. Try again, or email us directly at contacto@vensoco.com.</div>
@@ -345,7 +350,7 @@
 <section class="legal" id="privacy">
   <div class="wrap">
     <h2>Privacy & data</h2>
-    <p>The forms on this page collect your name, your project or skill information, and your email, solely so the Vensoco team can reach out about your signup. We don't sell or share this data with third parties, and we don't use it for anything other than responding to you. Submissions are processed through Formspree (formspree.io) before reaching our inbox.</p>
+    <p>The forms on this page collect your name, your project or skill information, and your email, solely so the Vensoco team can reach out about your signup. We don't sell or share this data with third parties, and we don't use it for anything other than responding to you. Submissions are processed through Google Forms before reaching our inbox.</p>
     <p>If you'd like us to delete your information, email us at contacto@vensoco.com. As explained above, Vensoco never takes part in negotiations or transactions between users — this notice covers only the contact details you give us directly when you sign up.</p>
   </div>
 </section>
@@ -357,9 +362,10 @@
 </footer>
 
 <script>
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbgrzgol';
+  var GOOGLE_FORM_CREADOR = 'https://docs.google.com/forms/d/e/1FAIpQLSc__yk6mTPdpXDagIGFTQtjx_h2Ubnq9z7IAi0pCiPWDRlFsA/formResponse';
+  var GOOGLE_FORM_SOCIO   = 'https://docs.google.com/forms/d/e/1FAIpQLSf7UYDZ_9gcZJWRML5CnbzFjiV8iS5wB1J5kXp34mpK0PDKFA/formResponse';
 
-  async function enviarFormulario(event, form, confirmId, errorId) {
+  async function enviarFormulario(event, form, confirmId, errorId, endpoint) {
     event.preventDefault();
     var boton = form.querySelector('button[type="submit"]');
     var textoOriginal = boton.textContent;
@@ -368,18 +374,17 @@
     boton.disabled = true;
     boton.textContent = 'Sending...';
     try {
-      var respuesta = await fetch(FORMSPREE_ENDPOINT, {
+      await fetch(endpoint, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        mode: 'no-cors',
+        body: new FormData(form)
       });
-      if (respuesta.ok) {
-        form.reset();
-        document.getElementById(confirmId).style.display = 'block';
-      } else {
-        document.getElementById(errorId).style.display = 'block';
-      }
+      // no-cors: Google doesn't allow reading whether the submission was accepted.
+      // Success is assumed because the manual test already validated the entry IDs.
+      form.reset();
+      document.getElementById(confirmId).style.display = 'block';
     } catch (error) {
+      // this does trigger on real network failures (offline, DNS, etc.)
       document.getElementById(errorId).style.display = 'block';
     }
     boton.disabled = false;
